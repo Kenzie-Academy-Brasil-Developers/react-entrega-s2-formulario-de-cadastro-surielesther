@@ -60,10 +60,6 @@ const DashboardStyle = styled.div`
     width: 100vw;
   }
 
-  main {
-    font-size: smaller;
-  }
-
   @media (min-width: 560px) {
     header {
       display: flex;

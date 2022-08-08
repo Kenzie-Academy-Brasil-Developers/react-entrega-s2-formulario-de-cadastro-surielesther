@@ -5,9 +5,9 @@ import { ToastContainer } from "react-toastify";
 
 import Login from "./pages/login";
 import Cadastro from "./pages/cadastro";
+import Dashboard from "./pages/dashboard";
 
 function App() {
-  const [autenticado, setAutenticado] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
   return (
@@ -26,15 +26,13 @@ function App() {
       />
       <Switch>
         <Route exact path="/">
-          <Login
-            autenticado={autenticado}
-            setAutenticado={setAutenticado}
-            userInfo={userInfo}
-            setUserInfo={setUserInfo}
-          ></Login>
+          <Login setUserInfo={setUserInfo}></Login>
         </Route>
         <Route exact path="/cadastro">
           <Cadastro></Cadastro>
+        </Route>
+        <Route exact path="/dashboard">
+          <Dashboard userInfo={userInfo}></Dashboard>
         </Route>
       </Switch>
     </div>

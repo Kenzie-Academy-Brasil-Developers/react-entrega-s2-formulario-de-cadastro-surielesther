@@ -1,12 +1,15 @@
 import DashboardStyle from "./style";
+import { useHistory } from "react-router-dom";
 
-export default function Dashboard({ setAutenticado, userInfo }) {
+export default function Dashboard({ userInfo }) {
+  const history = useHistory();
+
   return (
     <DashboardStyle>
       <div className="body">
         <div className="navBar">
           <h3>KenzieHub</h3>
-          <button onClick={() => setAutenticado(false)}>Sair</button>
+          <button onClick={() => history.push("/")}>Sair</button>
         </div>
         <div className="line"></div>
         <header>
