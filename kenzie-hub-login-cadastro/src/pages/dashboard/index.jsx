@@ -1,15 +1,25 @@
+import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+
 import DashboardStyle from "./style";
-import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
-export default function Dashboard({ userInfo }) {
-  const history = useHistory();
+export default function Dashboard() {
+  const navigate = useNavigate();
 
-  return (
+  const { userInfo, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  return userInfo ? (
     <DashboardStyle>
       <div className="body">
         <div className="navBar">
           <h3>KenzieHub</h3>
-          <button onClick={() => history.push("/")}>Sair</button>
+          <button onClick={() => navigate("/")}>Sair</button>
         </div>
         <div className="line"></div>
         <header>
@@ -25,5 +35,7 @@ export default function Dashboard({ userInfo }) {
         </main>
       </div>
     </DashboardStyle>
+  ) : (
+    <Navigate to="/" replace></Navigate>
   );
 }

@@ -1,12 +1,14 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
-import LoginStyle from "./style";
 
-export default function Login({ setUserInfo }) {
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+import LoginStyle from "./style";
+import { AuthContext } from "../../contexts/AuthContext";
+
+export default function Login() {
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatório").email("Email inválido"),
     password: yup.string().required("Senha obrigatória"),
@@ -20,24 +22,10 @@ export default function Login({ setUserInfo }) {
     resolver: yupResolver(formSchema),
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  function onSubmit(data) {
-    axios
-      .post("https://kenziehub.herokuapp.com/sessions", { ...data })
-      .then((response) => {
-        console.log(response.data);
-        window.localStorage.clear();
-        window.localStorage.setItem("authToken", response.data.token);
-        setUserInfo(response.data.user);
-        history.push("/dashboard");
-        toast.success("Login concluído com sucesso!");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Email e senha incorretos!");
-      });
-  }
+  const { onSubmit } = useContext(AuthContext);
+
   return (
     <LoginStyle>
       <div>
@@ -62,10 +50,7 @@ export default function Login({ setUserInfo }) {
           {errors.password?.message}
           <button type="submit">Entrar</button>
           <p className="text">Ainda não possui uma conta?</p>
-          <button
-            className="cadastrar"
-            onClick={() => history.push("/cadastro")}
-          >
+          <button className="cadastrar" onClick={() => navigate("/cadastro")}>
             Cadastre-se
           </button>
         </form>

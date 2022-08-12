@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import CadastroStyle from "./style";
+import api from "../../services/api";
 
 export default function Cadastro() {
   const formSchema = yup.object().shape({
@@ -33,11 +33,11 @@ export default function Cadastro() {
     resolver: yupResolver(formSchema),
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function onSubmit(data) {
-    axios
-      .post("https://kenziehub.herokuapp.com/users", data)
+    api
+      .post("/users", data)
       .then((response) => {
         console.log(response.data);
         toast.success("Cadastro feito com sucesso!");
@@ -53,7 +53,7 @@ export default function Cadastro() {
       <div>
         <header>
           <h3>KenzieHub</h3>
-          <button onClick={() => history.push("/")}>Voltar ao login</button>
+          <button onClick={() => navigate("/")}>Voltar ao login</button>
         </header>
         <form onSubmit={handleSubmit(onSubmit)}>
           <p>Crie sua conta</p>
