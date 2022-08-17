@@ -4,7 +4,7 @@ const DashboardStyle = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
   .body {
-    background-color: #000000;
+    background-color: #121214;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -52,6 +52,10 @@ const DashboardStyle = styled.div`
     border: none;
     border-radius: 4px;
     background-color: #212529;
+  }
+
+  button:hover {
+    cursor: pointer;
   }
 
   header,

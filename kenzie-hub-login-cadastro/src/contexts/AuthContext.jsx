@@ -10,36 +10,32 @@ export const AuthContext = createContext({});
 export default function AuthProvider({ children }) {
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(true);
+  const [userTechs, setUserTechs] = useState([]);
   const navigate = useNavigate();
 
+  const token = window.localStorage.getItem("authToken");
   useEffect(() => {
     async function loadUser() {
-      const token = window.localStorage.getItem("authToken");
-
       if (token) {
-        try {
-          api.defaults.headers.authorization = `Bearer ${token}`;
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
-          const { data } = await api.get("/profile");
-          setUserInfo(data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+        const { data } = await api.get("/profile");
+        setUserInfo(data);
+        setUserTechs(data.techs);
+      } else setUserInfo(false);
       setLoading(false);
     }
     loadUser();
-  }, []);
+  }, [userInfo]);
 
-  function onSubmit(data) {
-    const response = api
+  async function onSubmit(data) {
+    await api
       .post("/sessions", { ...data })
       .then((response) => {
-        console.log(response.data);
         window.localStorage.clear();
         window.localStorage.setItem("authToken", response.data.token);
         setUserInfo(response.data.user);
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
         toast.success("Login concluído com sucesso!");
       })
       .catch((err) => {
@@ -47,13 +43,14 @@ export default function AuthProvider({ children }) {
         toast.error("Email e senha incorretos!");
       });
 
-    const { token } = response.data;
-
+    const token = localStorage.getItem("authToken");
     api.defaults.headers.authorization = `Bearer ${token}`;
   }
 
   return (
-    <AuthContext.Provider value={{ userInfo, setUserInfo, onSubmit, loading }}>
+    <AuthContext.Provider
+      value={{ userInfo, setUserInfo, onSubmit, loading, token, userTechs }}
+    >
       {children}
     </AuthContext.Provider>
   );

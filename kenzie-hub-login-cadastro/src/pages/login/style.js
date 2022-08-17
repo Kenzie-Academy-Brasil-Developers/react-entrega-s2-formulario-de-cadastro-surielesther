@@ -4,7 +4,7 @@ const LoginStyle = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
   div {
-    background-color: #000000;
+    background-color: #121214;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -73,6 +73,10 @@ const LoginStyle = styled.div`
     border: none;
     border-radius: 4px;
     background-color: #ff577f;
+  }
+
+  button:hover {
+    cursor: pointer;
   }
 
   .cadastrar {

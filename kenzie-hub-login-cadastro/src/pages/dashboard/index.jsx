@@ -4,14 +4,16 @@ import { useContext } from "react";
 
 import DashboardStyle from "./style";
 import { AuthContext } from "../../contexts/AuthContext";
+import Loading from "../../components/Loading";
+import Techs from "../../components/Techs";
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
-  const { userInfo, loading } = useContext(AuthContext);
+  const { userInfo, setUserInfo, loading } = useContext(AuthContext);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <Loading></Loading>;
   }
 
   return userInfo ? (
@@ -19,7 +21,14 @@ export default function Dashboard() {
       <div className="body">
         <div className="navBar">
           <h3>KenzieHub</h3>
-          <button onClick={() => navigate("/")}>Sair</button>
+          <button
+            onClick={() => {
+              window.localStorage.clear();
+              setUserInfo(false);
+            }}
+          >
+            Sair
+          </button>
         </div>
         <div className="line"></div>
         <header>
@@ -28,10 +37,11 @@ export default function Dashboard() {
         </header>
         <div className="line"></div>
         <main>
-          <p className="title">Que pena! Estamos em desenvolvimento :(</p>
+          <Techs></Techs>
+          {/* <p className="title">Que pena! Estamos em desenvolvimento :(</p>
           <p>
             Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </p>
+          </p> */}
         </main>
       </div>
     </DashboardStyle>
