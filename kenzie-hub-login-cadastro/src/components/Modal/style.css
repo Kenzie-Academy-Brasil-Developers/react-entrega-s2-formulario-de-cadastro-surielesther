@@ -1,0 +1,86 @@
+.modal {
+  background-color: #212529;
+  width: 30vw;
+  min-width: 280px;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registerTitle {
+  background-color: #343b41;
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  width: 100%;
+  height: 8vh;
+  margin: 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.registerTitle p {
+  margin-left: 20px;
+}
+
+.registerTitle button {
+  background-color: #343b41;
+  color: #868e96;
+  border: none;
+  margin: 0px;
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+.Overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0px;
+  background-color: #0000006e;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+label {
+  color: #f8f9fa;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+input,
+select,
+option {
+  color: #f8f9fa;
+  background-color: #343b41;
+  height: 45px;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #ff577f;
+  color: white;
+  height: 45px;
+  margin-top: 30px;
+  border-radius: 4px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+@media (max-width: 440px) {
+  .modal {
+    min-width: 200px;
+  }
+}

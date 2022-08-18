@@ -29,12 +29,14 @@ const DashboardStyle = styled.div`
   h3 {
     color: #ff577f;
     margin-left: 10px;
+    margin-left: 0%;
   }
 
   .title {
     font-size: 15px;
     font-weight: 700;
     color: #f8f9fa;
+    padding: 0%;
   }
 
   p {
@@ -52,6 +54,7 @@ const DashboardStyle = styled.div`
     border: none;
     border-radius: 4px;
     background-color: #212529;
+    margin-right: 0%;
   }
 
   button:hover {

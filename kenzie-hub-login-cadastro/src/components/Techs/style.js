@@ -5,6 +5,7 @@ const TechsStyle = styled.div`
     font-weight: 600;
     font-size: 14px;
     color: white;
+    padding: 0%;
   }
 
   .techTitle {
@@ -18,6 +19,8 @@ const TechsStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 0%;
+    /* margin-top: 10px; */
   }
 
   .techsBackground {

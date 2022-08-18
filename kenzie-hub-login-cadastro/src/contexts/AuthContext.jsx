@@ -13,43 +13,43 @@ export default function AuthProvider({ children }) {
   const [userTechs, setUserTechs] = useState([]);
   const navigate = useNavigate();
 
-  const token = window.localStorage.getItem("authToken");
-  useEffect(() => {
-    async function loadUser() {
-      if (token) {
-        api.defaults.headers.authorization = `Bearer ${token}`;
+  async function loadUser() {
+    console.log("loadUser");
+    const token = window.localStorage.getItem("authToken");
+    if (token) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
 
-        const { data } = await api.get("/profile");
-        setUserInfo(data);
-        setUserTechs(data.techs);
-      } else setUserInfo(false);
-      setLoading(false);
-    }
+      const { data } = await api.get("/profile");
+      setUserInfo(data);
+      setUserTechs(data.techs);
+    } else setUserInfo(false);
+    setLoading(false);
+  }
+  useEffect(() => {
     loadUser();
-  }, [userInfo]);
+  }, []);
 
   async function onSubmit(data) {
     await api
       .post("/sessions", { ...data })
       .then((response) => {
+        const { user, token } = response.data;
+        api.defaults.headers.authorization = `Bearer ${token}`;
         window.localStorage.clear();
-        window.localStorage.setItem("authToken", response.data.token);
-        setUserInfo(response.data.user);
-        navigate("/dashboard", { replace: true });
+        window.localStorage.setItem("authToken", token);
+        setUserInfo(user);
         toast.success("Login concluído com sucesso!");
+        navigate("/dashboard", { replace: true });
       })
       .catch((err) => {
         console.log(err);
         toast.error("Email e senha incorretos!");
       });
-
-    const token = localStorage.getItem("authToken");
-    api.defaults.headers.authorization = `Bearer ${token}`;
   }
 
   return (
     <AuthContext.Provider
-      value={{ userInfo, setUserInfo, onSubmit, loading, token, userTechs }}
+      value={{ userInfo, setUserInfo, onSubmit, loading, userTechs, loadUser }}
     >
       {children}
     </AuthContext.Provider>

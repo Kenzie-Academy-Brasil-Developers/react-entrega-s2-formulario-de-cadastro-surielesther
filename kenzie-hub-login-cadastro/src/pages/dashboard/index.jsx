@@ -38,10 +38,6 @@ export default function Dashboard() {
         <div className="line"></div>
         <main>
           <Techs></Techs>
-          {/* <p className="title">Que pena! Estamos em desenvolvimento :(</p>
-          <p>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </p> */}
         </main>
       </div>
     </DashboardStyle>

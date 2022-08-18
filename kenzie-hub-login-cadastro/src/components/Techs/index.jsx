@@ -1,24 +1,21 @@
-import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
+import { useContext } from "react";
+
 import { RequestsContext } from "../../contexts/RequestsContext";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useContext } from "react";
 import TechsStyle from "./style";
+import TechModal from "../Modal";
 
 export default function Techs() {
   const { userInfo, userTechs } = useContext(AuthContext);
+  const { deletingTech } = useContext(RequestsContext);
 
   return (
     <TechsStyle>
       <div>
         <div className="techTitle">
           <p className="titles">Tecnologias</p>
-          <button
-            className="addTechButton"
-            onClick={() => console.log(userTechs)}
-          >
-            <AiOutlinePlus></AiOutlinePlus>
-          </button>
+          <TechModal></TechModal>
         </div>
         <div className="techsBackground">
           {userTechs.map((tech) => {
@@ -27,7 +24,10 @@ export default function Techs() {
                 <p className="titles">{tech.title}</p>
                 <div>
                   <p>{tech.status}</p>
-                  <button className="trashButton">
+                  <button
+                    className="trashButton"
+                    onClick={() => deletingTech(tech.id)}
+                  >
                     <BsFillTrashFill></BsFillTrashFill>
                   </button>
                 </div>
