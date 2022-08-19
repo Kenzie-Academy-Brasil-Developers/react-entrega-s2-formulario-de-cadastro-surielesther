@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { AuthContext } from "./AuthContext";
+import { toast } from "react-toastify";
 
 import api from "../services/api";
 
@@ -15,8 +16,12 @@ export default function RequestsProvider({ children }) {
       .post("/users/techs", data)
       .then((_) => {
         loadUser();
+        toast.success("Tecnologia adicionada!");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        toast.error("Algo deu errado, tente novamente");
+      });
   }
 
   function deletingTech(id) {
@@ -25,8 +30,12 @@ export default function RequestsProvider({ children }) {
       .delete(`/users/techs/${id}`)
       .then((_) => {
         loadUser();
+        toast.success("Tecnologia deletada!");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        toast.error("Algo deu errado, tente novamente");
+      });
   }
 
   return (
