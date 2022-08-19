@@ -52,12 +52,7 @@ export default function TechModal() {
           <p>Cadastrar Tecnologia</p>
           <button onClick={() => setModalIsOpen(false)}>X</button>
         </div>
-        <form
-          onSubmit={() => {
-            handleSubmit(postingNewTech);
-            setModalIsOpen(false);
-          }}
-        >
+        <form onSubmit={handleSubmit(postingNewTech)}>
           <label className="modalLabel">Nome</label>
           <input
             className="modalInput"
