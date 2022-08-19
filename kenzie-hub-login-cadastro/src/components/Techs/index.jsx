@@ -14,7 +14,7 @@ export default function Techs() {
     <TechsStyle>
       <div>
         <div className="techTitle">
-          <p className="titles">Tecnologias</p>
+          <p className="techs">Tecnologias</p>
           <TechModal></TechModal>
         </div>
         <div className="techsBackground">

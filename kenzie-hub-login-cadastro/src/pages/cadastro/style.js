@@ -35,6 +35,11 @@ const CadastroStyle = styled.div`
     width: 30vw;
   }
 
+  .back {
+    font-size: 14px;
+    margin: 0%;
+  }
+
   button:hover {
     cursor: pointer;
   }

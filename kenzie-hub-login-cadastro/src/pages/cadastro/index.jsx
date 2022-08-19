@@ -53,7 +53,9 @@ export default function Cadastro() {
       <div>
         <header>
           <h3>KenzieHub</h3>
-          <button onClick={() => navigate("/")}>Voltar ao login</button>
+          <button className="back" onClick={() => navigate("/")}>
+            Voltar ao login
+          </button>
         </header>
         <form onSubmit={handleSubmit(onSubmit)}>
           <p>Crie sua conta</p>

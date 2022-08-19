@@ -5,6 +5,13 @@ const TechsStyle = styled.div`
     font-weight: 600;
     font-size: 14px;
     color: white;
+    margin-left: 5px;
+  }
+
+  .techs {
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
     padding: 0%;
   }
 
@@ -20,7 +27,6 @@ const TechsStyle = styled.div`
     align-items: center;
     justify-content: center;
     margin-right: 0%;
-    /* margin-top: 10px; */
   }
 
   .techsBackground {

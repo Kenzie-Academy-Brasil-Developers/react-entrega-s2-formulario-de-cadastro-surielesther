@@ -58,11 +58,15 @@ export default function TechModal() {
             setModalIsOpen(false);
           }}
         >
-          <label>Nome</label>
-          <input type="text" {...register("title")}></input>
+          <label className="modalLabel">Nome</label>
+          <input
+            className="modalInput"
+            type="text"
+            {...register("title")}
+          ></input>
           <div className="error">{errors.title?.message}</div>
-          <label>Selecionar status</label>
-          <select {...register("status")}>
+          <label className="modalLabel">Selecionar status</label>
+          <select className="modalInput" {...register("status")}>
             <option>Iniciante</option>
             <option>Intermediário</option>
             <option>Avançado</option>
