@@ -29,7 +29,7 @@ export default function AuthProvider({ children }) {
     loadUser();
   }, []);
 
-  async function onSubmit(data) {
+  async function onSubmitLogin(data) {
     await api
       .post("/sessions", { ...data })
       .then((response) => {
@@ -47,9 +47,30 @@ export default function AuthProvider({ children }) {
       });
   }
 
+  async function onSubmitRegister(data) {
+    await api
+      .post("/users", data)
+      .then((response) => {
+        console.log(response.data);
+        toast.success("Cadastro feito com sucesso!");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Esse email já foi cadastrado!");
+      });
+  }
+
   return (
     <AuthContext.Provider
-      value={{ userInfo, setUserInfo, onSubmit, loading, userTechs, loadUser }}
+      value={{
+        userInfo,
+        setUserInfo,
+        onSubmitLogin,
+        onSubmitRegister,
+        loading,
+        userTechs,
+        loadUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

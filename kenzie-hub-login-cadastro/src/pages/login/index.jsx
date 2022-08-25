@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 
 import LoginStyle from "./style";
@@ -24,15 +25,17 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const { onSubmit } = useContext(AuthContext);
+  const { onSubmitLogin, userInfo } = useContext(AuthContext);
 
-  return (
+  return userInfo ? (
+    <Navigate to="/dashboard" replace></Navigate>
+  ) : (
     <LoginStyle>
       <div>
         <header>
           <h3>KenzieHub</h3>
         </header>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitLogin)}>
           <p>Login</p>
           <label>Email</label>
           <input

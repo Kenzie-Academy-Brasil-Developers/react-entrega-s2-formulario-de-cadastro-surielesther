@@ -2,9 +2,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import CadastroStyle from "./style";
-import api from "../../services/api";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Cadastro() {
   const formSchema = yup.object().shape({
@@ -35,18 +35,7 @@ export default function Cadastro() {
 
   const navigate = useNavigate();
 
-  function onSubmit(data) {
-    api
-      .post("/users", data)
-      .then((response) => {
-        console.log(response.data);
-        toast.success("Cadastro feito com sucesso!");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Esse email já foi cadastrado!");
-      });
-  }
+  const { onSubmitRegister } = useContext(AuthContext);
 
   return (
     <CadastroStyle>
@@ -57,7 +46,7 @@ export default function Cadastro() {
             Voltar ao login
           </button>
         </header>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitRegister)}>
           <p>Crie sua conta</p>
           <p className="subtitle">Rápido e grátis, vamos nessa</p>
           <label>Nome</label>
