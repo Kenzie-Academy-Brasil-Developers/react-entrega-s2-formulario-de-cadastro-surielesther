@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { RequestsContext } from "../../contexts/RequestsContext";
 import "./style.css";
+import { ITechsProps } from "../../contexts/AuthContext";
 
 export default function TechModal() {
   const formSchema = yup.object().shape({
@@ -19,7 +20,7 @@ export default function TechModal() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITechsProps>({
     resolver: yupResolver(formSchema),
   });
 
@@ -44,7 +45,6 @@ export default function TechModal() {
       <Modal
         className="modal"
         overlayClassName="Overlay"
-        afterOpen="afterOpen"
         isOpen={modalIsOpen}
         onRequestClose={handleCloseModal}
       >

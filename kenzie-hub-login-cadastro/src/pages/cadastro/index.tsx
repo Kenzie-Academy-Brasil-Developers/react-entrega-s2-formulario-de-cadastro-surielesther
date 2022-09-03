@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import CadastroStyle from "./style";
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext, IRegisterProps } from "../../contexts/AuthContext";
 
 export default function Cadastro() {
   const formSchema = yup.object().shape({
@@ -29,7 +29,7 @@ export default function Cadastro() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IRegisterProps>({
     resolver: yupResolver(formSchema),
   });
 

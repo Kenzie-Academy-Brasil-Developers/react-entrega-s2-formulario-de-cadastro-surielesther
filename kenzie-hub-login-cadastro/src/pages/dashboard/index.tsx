@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 
@@ -8,8 +7,6 @@ import Loading from "../../components/Loading";
 import Techs from "../../components/Techs";
 
 export default function Dashboard() {
-  const navigate = useNavigate();
-
   const { userInfo, setUserInfo, loading } = useContext(AuthContext);
 
   if (loading) {
@@ -24,7 +21,7 @@ export default function Dashboard() {
           <button
             onClick={() => {
               window.localStorage.clear();
-              setUserInfo(false);
+              setUserInfo(null);
             }}
           >
             Sair

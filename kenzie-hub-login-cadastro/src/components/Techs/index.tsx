@@ -7,7 +7,7 @@ import TechsStyle from "./style";
 import TechModal from "../Modal";
 
 export default function Techs() {
-  const { userInfo, userTechs } = useContext(AuthContext);
+  const { userTechs } = useContext(AuthContext);
   const { deletingTech } = useContext(RequestsContext);
 
   return (
